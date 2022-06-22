@@ -1,0 +1,86 @@
+<!Doctype html>
+<html>
+
+<head>
+    <title>Форма</title>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(() => {
+            $("#submitButton").click(function(ev) {
+                ev.preventDefault();
+
+                const name = document.getElementById('name');
+                const lastName = document.getElementById('lastName');
+                const email = document.getElementById('email');
+                const password = document.getElementById('password');
+                const username = document.getElementById('username');
+                const middleName = document.getElementById('middleName');
+
+                let data = "{" +
+                    '"name" : "' + name.value + '", \r\n ' +
+                    '"lastName" : "' + lastName.value + '", \r\n ' +
+                    '"email": "' + email.value + '", \r\n ' +
+                    '"password" : "' + password.value + '", \r\n ' +
+                    '"username" : "' + username.value + '", \r\n ' +
+                    '"middleName" : "' + middleName.value + '" }';
+
+                $.ajax({
+                    url: "/user/sendRegistrationForm",
+                    dataType: "json",
+                    headers: {
+                         'Content-Type': 'application/json'
+                     },
+                    type: "POST",
+                    data: data,
+                    statusCode: {
+                        202: function () {alert("Successfully send")},
+                        400: function () {alert("Client side error")},
+                        500: function () {alert("Server side error")}
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+<form id='regForm'>
+    Логин:
+    <input type='text'
+           id='username'
+           name='username'>
+    </input>
+    <br> Пароль:
+    <input type='password'
+           id='password'
+           name='password'>
+    </input>
+    <br> Email:
+    <input type='email'
+           id='email'
+           name='email'>
+    </input>
+    <br> Фамилия:
+    <input type='text'
+           id='lastName'
+           name='lastName'>
+    </input>
+    <br> Имя:
+    <input type='text'
+           id='name'
+           name='name'>
+    </input>
+    <br> Отчество:
+    <input type='text'
+           id='middleName'
+           name='middleName'>
+    </input>
+    <br>
+    <button type='submit'
+            id='submitButton'>
+        Отправить
+    </button>
+</form>
+</body>
+</html>
