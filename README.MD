@@ -15,8 +15,10 @@ Lombok.
 ## Демонстрация работы
 Форма 1:
 ![image](md_images/form1.png)
+
 Форма 2:
 ![image](md_images/form2.png)
+
 Результат:
 ![image](md_images/result.png)
 ## Запуск
