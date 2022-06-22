@@ -35,7 +35,7 @@ public class EventListening {
         var message = new GenericMessage<>(formCreatedEvent.formComplianceMessageDto());
         var retryTime = TimeUnit.MILLISECONDS.toMillis(500);
 
-        for (var retryCount = 1; retryCount < 3; retryCount++) {
+        for (var retryCount = 1; retryCount < 4; retryCount++) {
             Thread.sleep(retryTime);
             try {
                 formComplianceMessageService.doRequest(message);
@@ -58,7 +58,7 @@ public class EventListening {
         var message = String.format("Уважаемый %s %s, ваша форма изменила статус на %s",form.getName(), form.getMiddleName(), formStatusUpdatedEvent.registrationRecordStatus());
         var retryTime = TimeUnit.MILLISECONDS.toMillis(200);
 
-        for (var retryCount = 1; retryCount < 3; retryCount++) {
+        for (var retryCount = 1; retryCount < 4; retryCount++) {
 
             try {
                 mailNotifyService.sendMail(form.getEmail(), message);
